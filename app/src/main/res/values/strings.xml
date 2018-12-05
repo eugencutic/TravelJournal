@@ -13,4 +13,5 @@
     <string name="date_hint">DD/MM/YYYY</string>
     <string name="rating_label">Rating</string>
     <string name="save_label">Save</string>
+    <string name="app_title">Travel Journal</string>
 </resources>

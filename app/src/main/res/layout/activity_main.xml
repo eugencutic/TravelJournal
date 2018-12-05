@@ -187,10 +187,10 @@
         <ImageView
             android:id="@+id/img_destination"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/space_128"
-            android:layout_marginLeft="@dimen/space_64"
-            android:layout_marginRight="@dimen/space_64"
-            android:layout_marginBottom="@dimen/space_8"/>
+            android:layout_height="@dimen/space_XXL"
+            android:layout_marginLeft="@dimen/space_XL"
+            android:layout_marginRight="@dimen/space_XL"
+            android:layout_marginBottom="@dimen/space_M"/>
 
     </LinearLayout>
 </ScrollView>
