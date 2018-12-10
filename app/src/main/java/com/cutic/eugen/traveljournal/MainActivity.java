@@ -27,8 +27,12 @@ public class MainActivity extends AppCompatActivity {
         mImageViewDestinationImage = (ImageView)findViewById(R.id.img_destination);
     }
 
-    public void btnSaveWithPic(View view) {
+    public void btnAddPicOnClick(View view) {
         pickImage();
+    }
+
+    public void btnSaveOnClick(View view) {
+        finish();
     }
 
     private void pickImage() {

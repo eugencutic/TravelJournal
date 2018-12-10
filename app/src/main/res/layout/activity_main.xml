@@ -166,31 +166,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/rating_label"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="@dimen/space_XL"
+            android:layout_marginTop="@dimen/space_M"
+            android:layout_marginBottom="@dimen/space_S"
         android:textStyle="bold"/>
 
         <RatingBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="@dimen/space_XL"
+            android:layout_marginBottom="@dimen/space_M"
             android:backgroundTint="@color/colorPrimary"
             android:rating="1"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="32dp"
-            android:background="@color/colorPrimary"
-            android:text="@string/save_label"
-            android:onClick="btnSaveWithPic"/>
 
         <ImageView
             android:id="@+id/img_destination"
             android:layout_width="match_parent"
             android:layout_height="@dimen/space_XXL"
+            android:layout_marginTop="@dimen/space_S"
             android:layout_marginLeft="@dimen/space_XL"
             android:layout_marginRight="@dimen/space_XL"
-            android:layout_marginBottom="@dimen/space_M"/>
+            android:layout_marginBottom="@dimen/space_XXS"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:onClick="btnAddPicOnClick"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_M"
+            android:background="@color/colorPrimary"
+            android:text="@string/save_label"
+            android:onClick="btnSaveOnClick"/>
+
+
 
     </LinearLayout>
 </ScrollView>

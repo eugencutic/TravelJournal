@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DestinationsActivity">
+    tools:context=".DestinationsActivity"
+    android:orientation="vertical">
 
 
     <android.support.v7.widget.Toolbar
@@ -18,11 +19,31 @@
         app:title="@string/app_title"
         app:titleTextColor="@color/white"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_destinations"
-        android:layout_width="wrap_content"
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_destinations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/new_trip_floating_action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:src="@android:drawable/ic_menu_add"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_margin="@dimen/space_M"
+            android:onClick="btnAddTripOnClick"
+            >
+
+        </android.support.design.widget.FloatingActionButton>
+
+    </android.support.design.widget.CoordinatorLayout>
+
 
 </LinearLayout>
