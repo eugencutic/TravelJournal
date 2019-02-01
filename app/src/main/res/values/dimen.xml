@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="space_XXS">2dp</dimen>
-    <dimen name="space_XS">4dp</dimen>
     <dimen name="space_S">8dp</dimen>
     <dimen name="space_M">16dp</dimen>
-    <dimen name="space_L">32dp</dimen>
     <dimen name="space_XL">64dp</dimen>
     <dimen name="space_XXL">128dp</dimen>
-    <dimen name="text_space_XXS">2sp</dimen>
-    <dimen name="text_space_XS">4sp</dimen>
-    <dimen name="text_space_S">8sp</dimen>
-    <dimen name="text_space_M">16sp</dimen>
     <dimen name="text_space_L">32sp</dimen>
-    <dimen name="text_space_XL">64sp</dimen>
-    <dimen name="text_space_XXL">128sp</dimen>
 </resources>

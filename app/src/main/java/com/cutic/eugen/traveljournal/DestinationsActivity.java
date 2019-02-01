@@ -20,43 +20,8 @@ public class DestinationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_destinations);
 
-        mDestinations = getDestinationsList();
-
-        mRecyclerViewDestinations = findViewById(R.id.recycler_view_destinations);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        mRecyclerViewDestinations.setLayoutManager(layoutManager);
-
-        DestinationsAdapter destinationsAdapter = new DestinationsAdapter(mDestinations);
-        mRecyclerViewDestinations.setAdapter(destinationsAdapter);
 
 
-    }
 
-    private List<DestinationItem> getDestinationsList() {
-        List<DestinationItem> destinations = new ArrayList<>();
-
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-
-        return destinations;
-    }
-
-    public void btnAddTripOnClick(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
     }
 }
