@@ -133,6 +133,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/button_start_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -141,7 +142,8 @@
                 android:hint="@string/date_hint"
                 android:textColorHint="@color/colorPrimaryDark"
                 android:background="@color/colorPrimary"
-                android:textAlignment="textStart"/>
+                android:textAlignment="textStart"
+                android:onClick="btnStartDateOnClick"/>
 
             <View
                 android:layout_width="0dp"
@@ -150,6 +152,7 @@
                 ></View>
 
             <Button
+                android:id="@+id/button_end_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -158,7 +161,8 @@
                 android:hint="@string/date_hint"
                 android:textColorHint="@color/colorPrimaryDark"
                 android:background="@color/colorPrimary"
-                android:textAlignment="textStart"/>
+                android:textAlignment="textStart"
+                android:onClick="btnEndDateOnClick"/>
 
         </LinearLayout>
 
