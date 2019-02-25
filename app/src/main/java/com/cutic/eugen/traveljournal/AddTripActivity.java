@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.drm.DrmStore;
 import android.media.Rating;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,9 +21,16 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddTripActivity extends AppCompatActivity {
 
@@ -106,7 +114,31 @@ public class AddTripActivity extends AppCompatActivity {
         mTrip.setPrice(mSeekBarPrice.getProgress());
         mTrip.setRating(mRatingBar.getRating());
 
-        //TODO: save to database
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Map<String, Object> trip = new HashMap<>();
+        trip.put("title", mTrip.getTitle());
+        trip.put("destination", mTrip.getDestination());
+        trip.put("type", mTrip.getTripType());
+        trip.put("price", mTrip.getPrice());
+        trip.put("rating", mTrip.getRating());
+        trip.put("start_date", mTrip.getStartDate());
+        trip.put("end_date", mTrip.getEndDate());
+
+
+        db.collection("users")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .collection("trips").add(trip)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Logging.show("trip", "added");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Logging.show("trip", "failed");
+                    }});
 
         finish();
     }

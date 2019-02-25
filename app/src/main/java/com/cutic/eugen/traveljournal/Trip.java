@@ -2,21 +2,24 @@ package com.cutic.eugen.traveljournal;
 
 import java.util.Date;
 
+enum TripType {
+    CITY_BREAK,
+    SEASIDE,
+    MOUNTAINS;
+}
+
 public class Trip {
     private int ID;
     private String mTitle;
     private String mDestination;
 
-    private enum mTripType {
-        CITY_BREAK,
-        SEASIDE,
-        MOUNTAINS;
-    }
+    private TripType mTripType;
 
     private int mPrice;
     private double mRating;
     private Date mStartDate;
     private Date mEndDate;
+    private Boolean mIsFavourite = false;
 
     public String getTitle() {
         return mTitle;
@@ -64,5 +67,21 @@ public class Trip {
 
     public void setEndDate(Date mEndDate) {
         this.mEndDate = mEndDate;
+    }
+
+    public Boolean getIsFavourite() {
+        return mIsFavourite;
+    }
+
+    public void setIsFavourite(Boolean mIsFavourite) {
+        this.mIsFavourite = mIsFavourite;
+    }
+
+    public TripType getTripType() {
+        return mTripType;
+    }
+
+    public void setTripType(TripType mTripType) {
+        this.mTripType = mTripType;
     }
 }
