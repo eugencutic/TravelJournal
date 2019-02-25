@@ -3,6 +3,7 @@ package com.cutic.eugen.traveljournal;
 import android.app.Activity;
 import android.content.Intent;
 import android.drm.DrmStore;
+import android.media.Rating;
 import android.net.Uri;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
@@ -11,10 +12,17 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
+import android.widget.RatingBar;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+
+import java.util.Date;
 
 public class AddTripActivity extends AppCompatActivity {
 
@@ -22,6 +30,15 @@ public class AddTripActivity extends AppCompatActivity {
     private static final int PICK_END_DATE = 0;
     private static final int PICK_START_DATE = 1;
     private ImageView mImageViewDestinationImage;
+    private EditText mEditTextTripName;
+    private EditText mEditTextDestination;
+    private RadioGroup mRadioGroupTripType;
+    private TextView mTextViewPrice;
+    private SeekBar mSeekBarPrice;
+    private RatingBar mRatingBar;
+    private Button mButtonStartDate;
+    private Button mButtonEndDate;
+    private Trip mTrip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +46,51 @@ public class AddTripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_trip);
         //setSupportActionBar((Toolbar) findViewById(R.id.manage_trip_bar));
         mImageViewDestinationImage = (ImageView)findViewById(R.id.img_destination);
+
+        mEditTextTripName = findViewById(R.id.edit_text_trip_name);
+        mEditTextDestination = findViewById(R.id.edit_text_destination);
+        mRadioGroupTripType = findViewById(R.id.trip_type_radio);
+        mTextViewPrice = findViewById(R.id.text_view_price);
+        mSeekBarPrice = findViewById(R.id.seek_bar_price);
+        mRatingBar = findViewById(R.id.rating_bar_rate_trip);
+        mButtonStartDate = findViewById(R.id.button_start_date);
+        mButtonEndDate = findViewById(R.id.button_end_date);
+
+        mSeekBarPrice.setMax(4000);
+
+        mSeekBarPrice.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                String priceText = "Price ";
+                priceText += progress;
+                priceText += " (EUR)";
+                mTextViewPrice.setText(priceText);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        mTrip = new Trip();
     }
 
     public void setStartDate(Integer day, Integer month, Integer year) {
         String date = day.toString() + "/" + month.toString() + "/" + year.toString();
+        mTrip.setStartDate(new Date(year, month, day));
         Button buttonStartDate = (Button)findViewById(R.id.button_start_date);
         buttonStartDate.setText(date);
     }
 
     public void setEndDate(Integer day, Integer month, Integer year) {
         String date = day.toString() + "/" + month.toString() + "/" + year.toString();
+        mTrip.setEndDate(new Date(year, month, day));
         Button buttonStartDate = (Button)findViewById(R.id.button_end_date);
         buttonStartDate.setText(date);
     }
@@ -48,6 +100,14 @@ public class AddTripActivity extends AppCompatActivity {
     }
 
     public void btnSaveOnClick(View view) {
+
+        mTrip.setTitle(mEditTextTripName.getText().toString());
+        mTrip.setDestination(mEditTextDestination.getText().toString());
+        mTrip.setPrice(mSeekBarPrice.getProgress());
+        mTrip.setRating(mRatingBar.getRating());
+
+        //TODO: save to database
+
         finish();
     }
 

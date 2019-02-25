@@ -30,6 +30,7 @@
             android:textStyle="bold"/>
 
         <EditText
+            android:id="@+id/edit_text_trip_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -45,6 +46,7 @@
             android:textStyle="bold"/>
 
         <EditText
+            android:id="@+id/edit_text_destination"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -90,6 +92,7 @@
         </RadioGroup>
 
         <TextView
+            android:id="@+id/text_view_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/price_eur_label"
@@ -97,6 +100,7 @@
             android:textStyle="bold"/>
 
         <SeekBar
+            android:id="@+id/seek_bar_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -176,6 +180,7 @@
             android:textStyle="bold"/>
 
         <RatingBar
+            android:id="@+id/rating_bar_rate_trip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/space_XL"

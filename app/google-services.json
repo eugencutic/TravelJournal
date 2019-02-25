@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "672360049053",
+    "firebase_url": "https://travel-journal-56390.firebaseio.com",
+    "project_id": "travel-journal-56390",
+    "storage_bucket": "travel-journal-56390.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672360049053:android:5f8e11209ca356a9",
+        "android_client_info": {
+          "package_name": "com.cutic.eugen.traveljournal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "672360049053-60jrp1r7egfs2vt4harhqa78lquqafhb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIaSPEA_DmTt57qSv8N1nMYxCCxCI1dE4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
