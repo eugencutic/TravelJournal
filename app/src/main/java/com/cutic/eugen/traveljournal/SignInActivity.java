@@ -50,7 +50,7 @@ public class SignInActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Logging.show("user", "added");
+                        Logging.show("user", "set");
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -59,10 +59,10 @@ public class SignInActivity extends AppCompatActivity {
                     }
                 });
 
-                Map<String, Object> dummyTrip= new HashMap<>();
-                dummyTrip.put("dummy", "trip");
-                db.collection("users").document(authUser.getUid())
-                        .collection("trips").document("dummyTrip").set(dummyTrip);
+//                Map<String, Object> dummyTrip= new HashMap<>();
+//                dummyTrip.put("dummy", "trip");
+//                db.document("users/" + authUser.getUid())
+//                        .collection("trips").document("dummyTrip").set(dummyTrip);
 
                 Intent intent = new Intent(this, MainActivity.class);
                 if (intent.resolveActivity(getPackageManager()) != null) {

@@ -2,14 +2,10 @@ package com.cutic.eugen.traveljournal;
 
 import java.util.Date;
 
-enum TripType {
-    CITY_BREAK,
-    SEASIDE,
-    MOUNTAINS;
-}
+
 
 public class Trip {
-    private int ID;
+    private String ID;
     private String mTitle;
     private String mDestination;
 
@@ -20,6 +16,15 @@ public class Trip {
     private Date mStartDate;
     private Date mEndDate;
     private Boolean mIsFavourite = false;
+
+    public Trip() {
+
+    }
+
+    public Trip(String mTitle, String mDestination) {
+        this.mTitle = mTitle;
+        this.mDestination = mDestination;
+    }
 
     public String getTitle() {
         return mTitle;
@@ -83,5 +88,13 @@ public class Trip {
 
     public void setTripType(TripType mTripType) {
         this.mTripType = mTripType;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 }

@@ -32,6 +32,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.cutic.eugen.traveljournal.TripType;
+
 public class AddTripActivity extends AppCompatActivity {
 
     private static final int PICK_PHOTO_FOR_DESTINATION = 5;
@@ -118,29 +120,41 @@ public class AddTripActivity extends AppCompatActivity {
         Map<String, Object> trip = new HashMap<>();
         trip.put("title", mTrip.getTitle());
         trip.put("destination", mTrip.getDestination());
-        trip.put("type", mTrip.getTripType());
+        switch(mTrip.getTripType())
+        {
+            case CITY_BREAK:
+                trip.put("type", 0);
+                break;
+            case SEASIDE:
+                trip.put("type", 1);
+                break;
+            case MOUNTAINS:
+                trip.put("type", 2);
+                break;
+        }
         trip.put("price", mTrip.getPrice());
         trip.put("rating", mTrip.getRating());
         trip.put("start_date", mTrip.getStartDate());
         trip.put("end_date", mTrip.getEndDate());
+        trip.put("is_favourite", mTrip.getIsFavourite());
 
-
-        db.collection("users")
-                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+        db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .collection("trips").add(trip)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Logging.show("trip", "added");
+                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Logging.show("trip", "failed");
+                        finish();
                     }});
 
-        finish();
+
     }
 
     private void pickImage() {

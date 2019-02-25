@@ -10,10 +10,10 @@ import java.util.List;
 
 public class DestinationsAdapter extends RecyclerView.Adapter<DestinationsViewHolder> {
 
-    private List<DestinationItem> mDestinations;
+    private List<Trip> mTrips;
 
-    public DestinationsAdapter(List<DestinationItem> mDestinations) {
-        this.mDestinations = mDestinations;
+    public DestinationsAdapter(List<Trip> mTrips) {
+        this.mTrips = mTrips;
     }
 
     @NonNull
@@ -27,14 +27,14 @@ public class DestinationsAdapter extends RecyclerView.Adapter<DestinationsViewHo
 
     @Override
     public void onBindViewHolder(@NonNull DestinationsViewHolder destinationsViewHolder, int i) {
-        DestinationItem destinationItem = mDestinations.get(i);
+        Trip trip = mTrips.get(i);
 
-        destinationsViewHolder.mTextViewLocation.setText(destinationItem.getLocation());
-        destinationsViewHolder.mTextViewTitle.setText(destinationItem.getTitle());
+        destinationsViewHolder.mTextViewLocation.setText(trip.getDestination());
+        destinationsViewHolder.mTextViewTitle.setText(trip.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return mDestinations.size();
+        return mTrips.size();
     }
 }

@@ -128,19 +128,7 @@ public class MainActivity extends AppCompatActivity
     private List<DestinationItem> getDestinationsList() {
         List<DestinationItem> destinations = new ArrayList<>();
 
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
+        destinations.add(new DestinationItem("asd", "asf"));
 
         return destinations;
     }

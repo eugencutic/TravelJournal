@@ -2,6 +2,7 @@ package com.cutic.eugen.traveljournal;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -20,6 +29,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class TripsListFragment extends Fragment {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +40,7 @@ public class TripsListFragment extends Fragment {
     private String mParam2;
 
     private RecyclerView mRecyclerViewDestinations;
-    private List<DestinationItem> mDestinations;
+    private List<Trip> mTrips;
 
     public TripsListFragment() {
         // Required empty public constructor
@@ -72,35 +82,52 @@ public class TripsListFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        mDestinations = getDestinationsList();
+        mTrips = getTripsList();
 
         mRecyclerViewDestinations = view.findViewById(R.id.recycler_view_destinations);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity().getBaseContext());
         mRecyclerViewDestinations.setLayoutManager(layoutManager);
 
-        DestinationsAdapter destinationsAdapter = new DestinationsAdapter(mDestinations);
+        DestinationsAdapter destinationsAdapter = new DestinationsAdapter(mTrips);
         mRecyclerViewDestinations.setAdapter(destinationsAdapter);
     }
 
-    private List<DestinationItem> getDestinationsList() {
-        List<DestinationItem> destinations = new ArrayList<>();
+    private List<Trip> getTripsList() {
+        mTrips = new ArrayList<>();
 
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
-        destinations.add(new DestinationItem("Holiday 2017", "Islands"));
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .collection("trips")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
 
-        return destinations;
+                            for (QueryDocumentSnapshot doc : task.getResult()) {
+                                Trip trip = new Trip();
+                                trip.setID(doc.getId());
+                                trip.setTitle(doc.get("title").toString());
+                                trip.setDestination(doc.get("destination").toString());
+                                //trip.setPrice((int) doc.get("price"));
+                                //trip.setRating((double) doc.get("rating"));
+                                //trip.setIsFavourite((Boolean) doc.get("is_favourite"));
+                                //trip.setTripType((TripType) doc.get("type"));
+                                //trip.setStartDate((Date) doc.get("start_date"));
+                                //trip.setEndDate((Date) doc.get("end_date"));
+
+                                TripsListFragment.this.mTrips.add(trip);
+                            }
+                        }
+                        else {
+                            Logging.show(this, "query failed");
+                        }
+                    }
+                });
+
+        return mTrips;
     }
 
 }
