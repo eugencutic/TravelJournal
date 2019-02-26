@@ -1,6 +1,7 @@
 package com.cutic.eugen.traveljournal;
 
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.*;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -115,6 +117,9 @@ public class TripsListFragment extends Fragment {
 
                 holder.mTextViewLocation.setText(model.getDestination());
                 holder.mTextViewTitle.setText(model.getTitle());
+                if (model.getImageUri() != null)
+                    Picasso.get().load(Uri.parse(model.getImageUri()))
+                            .resize(100, 100).centerInside().into(holder.mImageViewPhoto);
             }
 
             @NonNull

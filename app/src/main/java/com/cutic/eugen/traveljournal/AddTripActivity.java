@@ -54,7 +54,7 @@ public class AddTripActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_trip);
-        //setSupportActionBar((Toolbar) findViewById(R.id.manage_trip_bar));
+
         mImageViewDestinationImage = (ImageView)findViewById(R.id.img_destination);
 
         mEditTextTripName = findViewById(R.id.edit_text_trip_name);
@@ -129,32 +129,12 @@ public class AddTripActivity extends AppCompatActivity {
         }
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Map<String, Object> trip = new HashMap<>();
-        trip.put("title", mTrip.getTitle());
-        trip.put("destination", mTrip.getDestination());
-        switch(mTrip.getTripType())
-        {
-            case CITY_BREAK:
-                trip.put("type", 0);
-                break;
-            case SEASIDE:
-                trip.put("type", 1);
-                break;
-            case MOUNTAINS:
-                trip.put("type", 2);
-                break;
-        }
-        trip.put("price", mTrip.getPrice());
-        trip.put("rating", mTrip.getRating());
-        trip.put("start_date", mTrip.getStartDate());
-        trip.put("end_date", mTrip.getEndDate());
-        trip.put("is_favourite", mTrip.getIsFavourite());
 
         String tripId = db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .collection("trips").document().getId();
 
         mTrip.setID(tripId);
-        trip.put("id", tripId);
+
 
         db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .collection("trips").document(tripId).set(mTrip)
@@ -191,6 +171,7 @@ public class AddTripActivity extends AppCompatActivity {
                     return;
                 }
                 Uri imgUri = data.getData();
+                mTrip.setImageUri(imgUri.toString());
                 Picasso.get().load(imgUri).into(mImageViewDestinationImage);
             }
         }

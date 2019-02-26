@@ -28,4 +28,6 @@
         <activity android:name=".DestinationsActivity" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

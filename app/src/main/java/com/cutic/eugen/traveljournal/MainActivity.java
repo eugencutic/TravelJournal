@@ -16,12 +16,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,7 +61,6 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.main_fragment_placeholder, new TripsListFragment());
         fragmentTransaction.commit();
 
-
     }
 
     @Override
@@ -75,6 +77,10 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        TextView textViewProfileName = findViewById(R.id.text_view_profile_name);
+        textViewProfileName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName().toString());
+        TextView textViewProfileEmail = findViewById(R.id.text_view_profile_email);
+        textViewProfileEmail.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail().toString());
         return true;
     }
 

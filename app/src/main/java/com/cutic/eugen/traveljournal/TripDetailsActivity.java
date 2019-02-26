@@ -1,12 +1,18 @@
 package com.cutic.eugen.traveljournal;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 import java.util.Date;
 
 public class TripDetailsActivity extends AppCompatActivity {
@@ -63,6 +69,7 @@ public class TripDetailsActivity extends AppCompatActivity {
         mTextViewEndDate.setText(endDateString);
 
         mRatingBarTripRating.setRating((float)mTrip.getRating());
-        //TODO: show pic
+        Picasso.get().load(Uri.parse(mTrip.getImageUri())).fit().into(mImageViewTripPic);
+
     }
 }

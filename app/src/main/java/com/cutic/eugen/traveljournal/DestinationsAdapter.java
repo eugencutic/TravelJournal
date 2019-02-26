@@ -31,6 +31,7 @@ public class DestinationsAdapter extends RecyclerView.Adapter<DestinationsViewHo
 
         destinationsViewHolder.mTextViewLocation.setText(trip.getDestination());
         destinationsViewHolder.mTextViewTitle.setText(trip.getTitle());
+
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.cutic.eugen.traveljournal;
 
+import android.net.Uri;
+
 import java.util.Date;
 
 import java.io.Serializable;
@@ -17,6 +19,7 @@ public class Trip implements Serializable {
     private Date mStartDate;
     private Date mEndDate;
     private Boolean mIsFavourite = false;
+    private String mImageUri;
 
     public Trip() {
 
@@ -108,5 +111,13 @@ public class Trip implements Serializable {
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public String getImageUri() {
+        return mImageUri;
+    }
+
+    public void setImageUri(String mImageUri) {
+        this.mImageUri = mImageUri;
     }
 }
