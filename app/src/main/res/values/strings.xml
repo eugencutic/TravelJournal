@@ -39,4 +39,6 @@
     </string>
     <string name="sign_in">SIGN IN</string>
     <string name="logo">logo</string>
+    <string name="missing_text">-</string>
+    <string name="trip_pic_content_description">Trip picture</string>
 </resources>

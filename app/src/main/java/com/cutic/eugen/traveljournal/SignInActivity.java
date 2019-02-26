@@ -59,10 +59,6 @@ public class SignInActivity extends AppCompatActivity {
                     }
                 });
 
-//                Map<String, Object> dummyTrip= new HashMap<>();
-//                dummyTrip.put("dummy", "trip");
-//                db.document("users/" + authUser.getUid())
-//                        .collection("trips").document("dummyTrip").set(dummyTrip);
 
                 Intent intent = new Intent(this, MainActivity.class);
                 if (intent.resolveActivity(getPackageManager()) != null) {

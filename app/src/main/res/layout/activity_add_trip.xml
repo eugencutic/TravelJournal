@@ -69,6 +69,7 @@
             android:layout_margin="8dp">
 
             <RadioButton
+                android:id="@+id/radio_button_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/trip_type_option1"
@@ -76,6 +77,7 @@
                 android:layout_margin="8dp"/>
 
             <RadioButton
+                android:id="@+id/radio_button_seaside"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/trip_type_option2"
@@ -83,6 +85,7 @@
                 android:layout_margin="8dp"/>
 
             <RadioButton
+                android:id="@+id/radio_button_mountains"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/trip_type_option3"

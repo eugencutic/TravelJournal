@@ -2,9 +2,10 @@ package com.cutic.eugen.traveljournal;
 
 import java.util.Date;
 
+import java.io.Serializable;
 
-
-public class Trip {
+@SuppressWarnings("serial")
+public class Trip implements Serializable {
     private String ID;
     private String mTitle;
     private String mDestination;
@@ -24,6 +25,17 @@ public class Trip {
     public Trip(String mTitle, String mDestination) {
         this.mTitle = mTitle;
         this.mDestination = mDestination;
+    }
+
+    public Trip(String title, String dest, TripType type, int price, double rating, Date start, Date end, Boolean fav) {
+        mTitle = title;
+        mDestination = dest;
+        mTripType = type;
+        mPrice = price;
+        mRating = rating;
+        mStartDate = start;
+        mEndDate = end;
+        mIsFavourite = fav;
     }
 
     public String getTitle() {

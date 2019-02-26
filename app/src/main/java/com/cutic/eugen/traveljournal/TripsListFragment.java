@@ -11,16 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.*;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 
 /*
@@ -41,6 +46,8 @@ public class TripsListFragment extends Fragment {
 
     private RecyclerView mRecyclerViewDestinations;
     private List<Trip> mTrips;
+
+    private FirestoreRecyclerAdapter<Trip, DestinationsViewHolder> adapter;
 
     public TripsListFragment() {
         // Required empty public constructor
@@ -82,15 +89,58 @@ public class TripsListFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        mTrips = getTripsList();
+        //mTrips = getTripsList();
 
         mRecyclerViewDestinations = view.findViewById(R.id.recycler_view_destinations);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity().getBaseContext());
         mRecyclerViewDestinations.setLayoutManager(layoutManager);
 
-        DestinationsAdapter destinationsAdapter = new DestinationsAdapter(mTrips);
-        mRecyclerViewDestinations.setAdapter(destinationsAdapter);
+        //DestinationsAdapter destinationsAdapter = new DestinationsAdapter(mTrips);
+        //mRecyclerViewDestinations.setAdapter(destinationsAdapter);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Query query = db.collection("users")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .collection("trips");
+
+        FirestoreRecyclerOptions<Trip> options = new FirestoreRecyclerOptions.Builder<Trip>()
+                                                    .setQuery(query, Trip.class)
+                                                    .build();
+
+        adapter = new FirestoreRecyclerAdapter<Trip, DestinationsViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull DestinationsViewHolder holder, int position, @NonNull Trip model) {
+                holder.Trip = model;
+
+                holder.mTextViewLocation.setText(model.getDestination());
+                holder.mTextViewTitle.setText(model.getTitle());
+            }
+
+            @NonNull
+            @Override
+            public DestinationsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View view = (View) LayoutInflater.from(viewGroup.getContext())
+                        .inflate(R.layout.view_destination_item, viewGroup, false);
+                return new DestinationsViewHolder(view);
+            }
+        };
+
+        mRecyclerViewDestinations.setAdapter(adapter);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if (adapter != null)
+            adapter.stopListening();
     }
 
     private List<Trip> getTripsList() {

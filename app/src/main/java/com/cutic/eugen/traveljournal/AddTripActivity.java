@@ -116,6 +116,18 @@ public class AddTripActivity extends AppCompatActivity {
         mTrip.setPrice(mSeekBarPrice.getProgress());
         mTrip.setRating(mRatingBar.getRating());
 
+        switch(mRadioGroupTripType.getCheckedRadioButtonId()) {
+            case R.id.radio_button_city:
+                mTrip.setTripType(TripType.CITY_BREAK);
+                break;
+            case R.id.radio_button_seaside:
+                mTrip.setTripType(TripType.SEASIDE);
+                break;
+            case R.id.radio_button_mountains:
+                mTrip.setTripType(TripType.MOUNTAINS);
+                break;
+        }
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> trip = new HashMap<>();
         trip.put("title", mTrip.getTitle());
@@ -138,11 +150,17 @@ public class AddTripActivity extends AppCompatActivity {
         trip.put("end_date", mTrip.getEndDate());
         trip.put("is_favourite", mTrip.getIsFavourite());
 
+        String tripId = db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .collection("trips").document().getId();
+
+        mTrip.setID(tripId);
+        trip.put("id", tripId);
+
         db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .collection("trips").add(trip)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                .collection("trips").document(tripId).set(mTrip)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
+                    public void onSuccess(Void aVoid) {
                         Logging.show("trip", "added");
                         finish();
                     }
@@ -153,8 +171,6 @@ public class AddTripActivity extends AppCompatActivity {
                         Logging.show("trip", "failed");
                         finish();
                     }});
-
-
     }
 
     private void pickImage() {
